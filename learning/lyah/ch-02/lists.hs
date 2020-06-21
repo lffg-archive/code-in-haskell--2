@@ -114,4 +114,39 @@ elemResult2 = elem 4 [1, 2, 3] -- False
 -- Note that in all the above functions, the list is the last argument. This
 -- helps in function composition (because of currying).
 
+cycleResult = take 10 (cycle [1, 2, 3]) -- [1, 2, 3, 1, 2, 3, 1, 2, 3, 1]
+
+repeatResult = take 10 (repeat 1) -- [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+-- The functions `cycle` and `repeat` produce an infinite list. The `take`
+-- function was used to fetch the first 10 elements from the infinite list.
+
+-- In the last `repeat` example, the `replicate` function would be the same:
+
+replicateResult = replicate 10 1 -- [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
 --------------------------------------------------------------------------------
+
+-- In Haskell, we can create lists (and infinite lists) using ranges. Like so:
+
+range1 = [1 .. 10] -- [1, 2, ..., 9, 10]
+
+-- Steps may be used in list ranges:
+
+evenRange = [2, 4 .. 10] -- [2, 4, 6, 8, 10]
+oddRange = [1, 3 .. 10] -- [1, 3, 5, 7, 9]
+
+-- Infinite lists can also be created. In that regard, it is pertinent to note
+-- that they won't be evaluated unless needed (as Haskell is a lazy language).
+-- The `take` function is used to take X elements from an infinite list.
+
+infiniteList = [1 ..] -- [1, 2, 3, ...]
+first10FromInfiniteList = take 10 infiniteList
+
+-- Steps can also be used in infinite lists:
+
+evenInfiniteList = [2, 4 ..] -- [2, 4, 6, ...]
+
+--------------------------------------------------------------------------------
+
+-- List comprehensions
