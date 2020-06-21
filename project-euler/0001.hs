@@ -5,13 +5,13 @@
 --
 -- https://projecteuler.net/problem=1
 
-isMultipleOf num x =
-  x `mod` num == 0
+import           Data.List
 
 problem1 x =
-  sum $
-  filter (\num -> (isMultipleOf 3 num) || (isMultipleOf 5 num)) $
-  [1..(x - 1)]
+  sum $ filter (\num -> num `mod` 3 == 0 || num `mod` 5 == 0) [1 .. (x - 1)]
 
-main =
+problem1' x = sum $ union [3, 6 .. y] [5, 10 .. y] where y = x - 1
+
+main = do
   print $ problem1 1000
+  print $ problem1' 1000
