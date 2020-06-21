@@ -1,3 +1,4 @@
+{-# ANN module "HLint: Evaluate. Replace with: True" #-}
 {-# ANN module "HLint: ignore Use list literal" #-}
 {-# ANN module "HLint: ignore Use head" #-}
 
@@ -24,8 +25,8 @@ newNumList = numList ++ [4, 5]
 -- Therefore, the following two are equivalent (note that they both have the
 -- same type, which is `[Char]` (or just `String`)).
 
-myString = ['L', 'u', 'i', 'z'] :: String
-myString' = "Luiz" :: String
+myString1 = ['L', 'u', 'i', 'z'] :: String
+myString2 = "Luiz" :: String
 
 --------------------------------------------------------------------------------
 
@@ -60,5 +61,57 @@ numListAt2 = numList !! 2
 -- If we try to access a index out of the list's range, an "index too large" is
 -- throw. To prevent that, we can use the `null` function, which returns `True`
 -- if the list is empty. The expression `length [a] == 0` also works.
+
+--------------------------------------------------------------------------------
+
+-- When two lists are compared using comparison operators (like `<`, `>`, etc),
+-- the head is first compared. If they are equal in both arrays, the second
+-- element is compared and so on. This is called "lexicographical order".
+
+listComparisonResult1 = [1, 8, 9] > [9, 2, 1] -- False
+listComparisonResult2 = [9, 1, 2] > [1, 8, 9] -- True
+
+--------------------------------------------------------------------------------
+
+-- There are a lot of functions which operates on lists. Some of them are:
+
+headResult = head [1, 2, 3] -- 1
+
+tailResult = tail [1, 2, 3] -- [2, 3]
+
+lastResult = last [1, 2, 3] -- 3
+
+initResult = init [1, 2, 3] -- [1, 2]
+
+-- Note that `head`, `tail`, `last` and `init` will throw an "empty list"
+-- exception when a empty list is passed.
+
+lengthResult = [1, 2, 3] -- 3
+
+nullResult1 = null [] -- True
+nullResult2 = null [1, 2, 3] -- False
+
+reverseResult = reverse [1, 2, 3] -- [3, 2, 1]
+
+takeResult = take 2 [1, 2, 3] -- [1, 2]
+
+-- Note that `take` does not throw any exception if the first argument number
+-- is greater than the given list's length.
+
+dropResult = drop 2 [1, 2, 3] -- [3]
+
+maximumResult = maximum [1, 2, 3] -- 3
+
+minimumResult = minimum [1, 2, 3] -- 1
+
+sumResult = sum [1, 2, 3, 4] -- 6
+
+productResult = product [1, 2, 3, 4] -- 24
+
+elemResult1 = elem 2 [1, 2, 3] -- True
+elemResult2 = elem 4 [1, 2, 3] -- False
+
+-- Note that in all the above functions, the list is the last argument. This
+-- helps in function composition (because of currying).
 
 --------------------------------------------------------------------------------
