@@ -22,7 +22,7 @@ newNumList = numList ++ [4, 5]
 -- The `++` operator can also be used to "concatenate" two strings, as strings
 -- are just some kind of syntactic sugar for a list of characters.
 -- Therefore, the following two are equivalent (note that they both have the
--- same type, which is `[Char]`).
+-- same type, which is `[Char]` (or just `String`)).
 
 myString = ['L', 'u', 'i', 'z'] :: String
 myString' = "Luiz" :: String
