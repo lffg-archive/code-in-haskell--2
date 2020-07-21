@@ -11,14 +11,14 @@ stringList = ["Luiz", "Felipe", "Gonçalves"]
 
 --------------------------------------------------------------------------------
 
+-- [[ LIST CONCATENATION ]]
+
 -- Two lists may be concatenated with the `++` operator. Like so:
 
 newNumList = numList ++ [4, 5]
 
 -- However, the `++` operator is not recommended for big lists, as Haskell will
 -- internally walk through the whole left-side list.
-
---------------------------------------------------------------------------------
 
 -- The `++` operator can also be used to "concatenate" two strings, as strings
 -- are just some kind of syntactic sugar for a list of characters.
@@ -29,6 +29,8 @@ myString1 = ['L', 'u', 'i', 'z'] :: String
 myString2 = "Luiz" :: String
 
 --------------------------------------------------------------------------------
+
+-- [[ THE CONS OPERATOR ]]
 
 -- In contrast of putting something at the end of a Haskell list, putting
 -- something on its beginning is very cheap ("instantaneous"). For that, the
@@ -52,6 +54,8 @@ numList3' = 1 : 2 : 3 : 4 : 5 : []
 
 --------------------------------------------------------------------------------
 
+-- [[ ACCESSING A LIST'S ELEMENT BY ITS INDEX ]]
+
 -- We can access some list member by its index using the `!!` operator:
 
 numListAt0 = numList !! 0
@@ -64,6 +68,8 @@ numListAt2 = numList !! 2
 
 --------------------------------------------------------------------------------
 
+-- [[ COMPARING LISTS ]]
+
 -- When two lists are compared using comparison operators (like `<`, `>`, etc),
 -- the head is first compared. If they are equal in both arrays, the second
 -- element is compared and so on. This is called "lexicographical order".
@@ -72,6 +78,8 @@ listComparisonResult1 = [1, 8, 9] > [9, 2, 1] -- False
 listComparisonResult2 = [9, 1, 2] > [1, 8, 9] -- True
 
 --------------------------------------------------------------------------------
+
+-- [[ COMMON LIST FUNCTIONS ]]
 
 -- There are a lot of functions which operates on lists. Some of them are:
 
@@ -127,6 +135,8 @@ replicateResult = replicate 10 1 -- [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
 --------------------------------------------------------------------------------
 
+-- [[ INFINITE LISTS BASICS ]]
+
 -- In Haskell, we can create lists (and infinite lists) using ranges. Like so:
 
 range1 = [1 .. 10] -- [1, 2, ..., 9, 10]
@@ -149,4 +159,35 @@ evenInfiniteList = [2, 4 ..] -- [2, 4, 6, ...]
 
 --------------------------------------------------------------------------------
 
--- List comprehensions
+-- [[ LIST COMPREHENSIONS ]]
+
+-- List comprehensions come from the mathematic concept of "set comprehensions".
+-- They allow the creation of lists.
+
+-- The following example generates the first 10 even numbers:
+
+firstTenEvenNumbers = [ x * 2 | x <- [1 .. 10] ] -- [2, 4, 6, ..., 16, 18, 20]
+
+-- In the above expression, the `x <- [1 .. 10]` part is called "generator".
+-- There is the possibility to have more than one generators. For example:
+
+pairs = [ (i, j) | i <- [1, 2], j <- [1 .. 3] ]
+-- [(1, 1), (1, 2), (1, 3), (2, 1), (2, 2), (2, 3)]
+
+-- "Predicates" can be also used in list comprehensions, just after its
+-- generators. A list comprehension's predicate acts in any of the variables
+-- which were created by one of its generators.
+
+predicateExample = [ show x | x <- [1 .. 50], x `mod` 5 == 0 ]
+-- ["5", "10", "15", "20", "25", "30", "35", "40", "45", "50"]
+
+-- Like several generators can be used within a list comprehension, multiple
+-- predicates can be used:
+
+multiplesOf3and5 = [ x | x <- [1 .. 50], x `mod` 3 == 0, x `mod` 5 == 0 ]
+-- [15, 30, 45]
+
+-- Another example, which removes all the non upper cases characters:
+
+removeNonUppercase str = [ char | char <- str, char `elem` ['A' .. 'Z'] ]
+resultOfRNU = removeNonUppercase "Luiz Felipe" -- "LF"
