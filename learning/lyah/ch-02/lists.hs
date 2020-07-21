@@ -2,6 +2,10 @@
 {-# ANN module "HLint: ignore Use list literal" #-}
 {-# ANN module "HLint: ignore Use head" #-}
 
+--------------------------------------------------------------------------------
+
+-- [[ LISTS ]]
+
 -- Lists can be created with [].
 -- Lists are homogeneous (can contain only elements of the same type).
 
